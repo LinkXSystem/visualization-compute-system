@@ -5,7 +5,12 @@ const { Controller } = require('egg');
 class ArticleController extends Controller {
   constructor(ctx) {
     super(ctx);
-    this.rules = {
+
+    this.ArticleCreateTransfer = {
+      label: {
+        type: 'array',
+        require: true,
+      },
       title: {
         type: 'string',
         required: true,
@@ -27,14 +32,17 @@ class ArticleController extends Controller {
    * @description GET
    * @memberof ArticleController
    */
-  index() {
+  async index() {
     const { ctx } = this;
+    const payload = ctx.request.body || {};
 
-    ctx.body = {
-      message: 'The Article of Query !',
-    };
+    const count = await ctx.service.articles.count(payload);
+    const list = await ctx.service.articles.find(payload);
 
-    ctx.status = 200;
+    ctx.helper.success(ctx, {
+      total: count,
+      list,
+    });
   }
 
   /**
@@ -44,26 +52,15 @@ class ArticleController extends Controller {
    * @memberof ArticleController
    */
   async create() {
-    const { ctx, rules } = this;
-    ctx.validate(rules);
+    const { ctx, ArticleCreateTransfer } = this;
 
-    const uuid = await ctx.service.articles.create();
+    ctx.validate(ArticleCreateTransfer);
 
-    ctx.body = {
-      uuid,
-    };
+    const payload = ctx.request.body || {};
 
-    ctx.status = 200;
-  }
+    const data = await ctx.service.articles.create(payload);
 
-  system() {
-    const { ctx } = this;
-
-    ctx.body = {
-      message: 'system',
-    };
-
-    ctx.status = 200;
+    ctx.helper.success(ctx, data);
   }
 
   /**
@@ -97,6 +94,22 @@ class ArticleController extends Controller {
    * @memberof ArticleController
    */
   destroy() {}
+
+  async findArticleByLabel() {
+    const { ctx } = this;
+    const { label } = ctx.query || {};
+    if (!label) {
+      ctx.helper.arguments(ctx, {
+        message: 'the label is null, please check your query',
+      });
+    }
+
+    const list = await ctx.service.articles.findArticleByLabel(label);
+
+    ctx.helper.success(ctx, {
+      list,
+    });
+  }
 }
 
 module.exports = ArticleController;

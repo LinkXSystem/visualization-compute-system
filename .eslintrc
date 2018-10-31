@@ -1,6 +1,7 @@
 {
   "extends": "eslint-config-egg",
   "rules": {
-    "linebreak-style": "off"
+    "linebreak-style": "off",
+    "comma-dangle": "off"
   }
 }

@@ -8,6 +8,11 @@ exports.validate = {
   package: 'egg-validate',
 };
 
+exports.mongoose = {
+  enable: true,
+  package: 'egg-mongoose',
+};
+
 exports.routerPlus = {
   enabled: true,
   package: 'egg-router-plus',

@@ -9,5 +9,18 @@ module.exports = appInfo => {
   // add your config here
   config.middleware = [];
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
+  config.mongoose = {
+    client: {
+      url: 'mongodb://193.112.23.66:27017/blog',
+      options: {},
+    },
+  };
+
   return config;
 };

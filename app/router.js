@@ -6,7 +6,8 @@
 module.exports = app => {
   const { router, controller } = app;
 
+  // 博客文章
   const articles = router.namespace('/articles');
   articles.resources('/', controller.articles);
-  articles.get('/:uuid/system', controller.articles.system);
+  articles.get('/label', controller.articles.findArticleByLabel);
 };
