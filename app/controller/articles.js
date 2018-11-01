@@ -24,6 +24,32 @@ class ArticleController extends Controller {
         required: true,
       },
     };
+
+    this.ArticleLabelTransfer = {
+      label: {
+        type: 'array',
+        required: true,
+      },
+    };
+
+    this.ArticleUpdateTransfer = {
+      label: {
+        type: 'array',
+        required: false,
+      },
+      title: {
+        type: 'string',
+        required: false,
+      },
+      author: {
+        type: 'string',
+        required: false,
+      },
+      content: {
+        type: 'string',
+        required: false,
+      },
+    };
   }
 
   /**
@@ -69,14 +95,28 @@ class ArticleController extends Controller {
    * @description GET
    * @memberof ArticleController
    */
-  show() {
+  async show() {
     const { ctx } = this;
 
-    ctx.body = {
-      message: 'The Article of Query By UUID !',
-    };
+    const { id: uuid } = ctx.params || {};
 
-    ctx.status = 200;
+    if (!uuid) {
+      throw Object.assign({}, new Error(), {
+        status: 422,
+        message: 'querying interface must have uuid about article',
+      });
+    }
+
+    const data = await ctx.service.articles.findArticleByUuid(uuid);
+
+    if (!data) {
+      throw Object.assign({}, new Error(), {
+        status: 404,
+        message: 'article is not found, please check your querying',
+      });
+    }
+
+    ctx.helper.success(ctx, data);
   }
 
   /**
@@ -85,7 +125,24 @@ class ArticleController extends Controller {
    * @description PUT
    * @memberof ArticleController
    */
-  update() {}
+  async update() {
+    const { ctx, ArticleUpdateTransfer } = this;
+
+    ctx.validate(ArticleUpdateTransfer);
+
+    // eslint-disable-next-line
+    const { id: uuid } = ctx.params || {};
+    const data = ctx.request.body || {};
+
+    await ctx.service.articles.update({
+      query: { uuid },
+      update: data,
+    });
+
+    ctx.helper.success(ctx, {
+      message: 'article is updated',
+    });
+  }
 
   /**
    *
@@ -93,20 +150,36 @@ class ArticleController extends Controller {
    * @description DELETE
    * @memberof ArticleController
    */
-  destroy() {}
+  async destroy() {
+    const { ctx } = this;
+
+    const { id: uuid } = ctx.params || {};
+
+    await ctx.service.articles.delete({
+      uuid,
+    });
+
+    ctx.helper.success(ctx, {
+      message: 'article is deleted',
+    });
+  }
 
   async findArticleByLabel() {
-    const { ctx } = this;
-    const { label } = ctx.query || {};
-    if (!label) {
-      ctx.helper.arguments(ctx, {
-        message: 'the label is null, please check your query',
-      });
-    }
+    const { ctx, ArticleLabelTransfer } = this;
 
+    ctx.validate(ArticleLabelTransfer);
+
+    const { label } = ctx.request.body || {};
+
+    const total = await ctx.service.articles.count({
+      label: {
+        $all: label,
+      },
+    });
     const list = await ctx.service.articles.findArticleByLabel(label);
 
     ctx.helper.success(ctx, {
+      total,
       list,
     });
   }

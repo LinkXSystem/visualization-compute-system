@@ -20,6 +20,19 @@ class ArticleService extends Service {
     return ctx.model.Article.create(temp);
   }
 
+  update(payload) {
+    const { ctx } = this;
+    const { query, update } = payload;
+
+    return ctx.model.Article.update(query, update, { upsert: false });
+  }
+
+  delete(payload) {
+    const { ctx } = this;
+
+    return ctx.model.Article.deleteOne(payload);
+  }
+
   count(payload) {
     const { ctx } = this;
 
@@ -52,7 +65,11 @@ class ArticleService extends Service {
   findArticleByLabel(label) {
     const { ctx } = this;
     return ctx.model.Article.find(
-      {},
+      {
+        label: {
+          $all: label,
+        },
+      },
       {
         __v: 0,
         _id: 0,

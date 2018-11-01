@@ -7,7 +7,7 @@ module.exports = app => {
   const { router, controller } = app;
 
   // 博客文章
-  const articles = router.namespace('/articles');
+  const articles = router.namespace('/api/v1/articles');
   articles.resources('/', controller.articles);
-  articles.get('/label', controller.articles.findArticleByLabel);
+  articles.post('/labels', controller.articles.findArticleByLabel);
 };

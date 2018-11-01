@@ -7,7 +7,15 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1540906612090_1537';
 
   // add your config here
-  config.middleware = [];
+  config.middleware = ['error'];
+
+  config.cluster = {
+    listen: {
+      port: 8080,
+      path: '',
+      hostname: '0.0.0.0',
+    },
+  };
 
   config.security = {
     csrf: {
