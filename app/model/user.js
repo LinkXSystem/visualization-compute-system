@@ -23,7 +23,7 @@ module.exports = app => {
     },
     avatar: {
       type: String,
-      required: true,
+      default: '',
     },
     update_time: {
       type: Date,

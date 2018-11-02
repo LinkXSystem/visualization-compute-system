@@ -3,31 +3,27 @@
 module.exports = app => {
   const { mongoose } = app;
 
-  const ArticleSchema = new mongoose.Schema({
+  const ColumnSchema = new mongoose.Schema({
     uuid: {
       type: String,
       unique: true,
       required: true,
     },
-    column_uuid: {
+    user_uuid: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'Column',
+      ref: 'User',
     },
-    label: {
+    name: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+    },
+    labels: {
       type: Array,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: true,
-    },
-    author: {
-      type: String,
-      required: true,
-    },
-    content: {
-      type: String,
-      required: true,
+      default: [],
     },
     update_time: {
       type: Date,
@@ -39,5 +35,5 @@ module.exports = app => {
     },
   });
 
-  return mongoose.model('Article', ArticleSchema);
+  return mongoose.model('Column', ColumnSchema);
 };
