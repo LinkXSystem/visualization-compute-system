@@ -3,7 +3,7 @@
 module.exports = app => {
   const { mongoose } = app;
 
-  const ColumnSchema = new mongoose.Schema({
+  const CommentSchema = new mongoose.Schema({
     uuid: {
       type: String,
       unique: true,
@@ -13,17 +13,13 @@ module.exports = app => {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User',
     },
-    title: {
+    content: {
       type: String,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
-    update_time: {
-      type: Date,
-      required: true,
+    article: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Article',
     },
     create_time: {
       type: Date,
@@ -31,5 +27,5 @@ module.exports = app => {
     },
   });
 
-  return mongoose.model('Column', ColumnSchema);
+  return mongoose.model('Comment', CommentSchema);
 };

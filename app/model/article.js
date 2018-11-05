@@ -9,7 +9,7 @@ module.exports = app => {
       unique: true,
       required: true,
     },
-    column_uuid: {
+    column: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Column',
     },
@@ -21,14 +21,20 @@ module.exports = app => {
       type: String,
       required: true,
     },
-    author: {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+    paragraphs: {
       type: String,
       required: true,
     },
-    content: {
-      type: String,
-      required: true,
-    },
+    comments: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Comment',
+      },
+    ],
     update_time: {
       type: Date,
       required: true,

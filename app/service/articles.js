@@ -20,9 +20,15 @@ class ArticleService extends ConstraintService {
     return ctx.model.Article.find(payload, {
       __v: 0,
       _id: 0,
-    }).sort({
-      update_time: -1,
-    });
+    })
+      .populate('column')
+      .populate('user')
+      .populate({
+        path: 'comments',
+      })
+      .sort({
+        update_time: -1,
+      });
   }
 
   findArticleByUuid(uuid) {

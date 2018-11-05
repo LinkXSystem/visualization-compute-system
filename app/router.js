@@ -11,7 +11,15 @@ module.exports = app => {
   articles.resources('/', controller.articles);
   articles.post('/labels', controller.articles.findArticleByLabel);
 
+  // 博客评论
+  const comments = router.namespace('/api/v1/comment');
+  comments.resources('/', controller.comments);
+
   // 博客用户
   const users = router.namespace('/api/v1/user');
   users.resources('/', controller.users);
+
+  // 博客专栏
+  const columns = router.namespace('/api/v1/column');
+  columns.resources('/', controller.columns);
 };

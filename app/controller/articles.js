@@ -7,6 +7,10 @@ class ArticleController extends Controller {
     super(ctx);
 
     this.ArticleCreateTransfer = {
+      column: {
+        type: 'string',
+        required: false,
+      },
       label: {
         type: 'array',
         require: true,
@@ -15,13 +19,17 @@ class ArticleController extends Controller {
         type: 'string',
         required: true,
       },
-      author: {
+      user: {
         type: 'string',
         required: true,
       },
-      content: {
+      paragraphs: {
         type: 'string',
         required: true,
+      },
+      comments: {
+        type: 'array',
+        required: false,
       },
     };
 
@@ -41,11 +49,11 @@ class ArticleController extends Controller {
         type: 'string',
         required: false,
       },
-      author: {
+      user: {
         type: 'string',
         required: false,
       },
-      content: {
+      paragraphs: {
         type: 'string',
         required: false,
       },
