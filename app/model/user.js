@@ -9,6 +9,14 @@ module.exports = app => {
       unique: true,
       required: true,
     },
+    nickname: {
+      type: String,
+      required: true,
+    },
+    avatar: {
+      type: String,
+      default: '',
+    },
     email: {
       type: String,
       required: true,
@@ -17,13 +25,9 @@ module.exports = app => {
       type: String,
       required: true,
     },
-    nickname: {
+    salt: {
       type: String,
       required: true,
-    },
-    avatar: {
-      type: String,
-      default: '',
     },
     update_time: {
       type: Date,

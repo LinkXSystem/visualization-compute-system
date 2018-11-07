@@ -29,17 +29,17 @@ class UserController extends Controller {
     };
   }
 
-  async create() {
-    const { ctx, UserCreateTransfer } = this;
+  // async create() {
+  //   const { ctx, UserCreateTransfer } = this;
 
-    ctx.validate(UserCreateTransfer);
+  //   ctx.validate(UserCreateTransfer);
 
-    const payload = ctx.request.body || {};
+  //   const payload = ctx.request.body || {};
 
-    const user = await ctx.service.users.create(payload);
+  //   const user = await ctx.service.users.create(payload);
 
-    ctx.helper.success(ctx, user);
-  }
+  //   ctx.helper.success(ctx, user);
+  // }
 }
 
 module.exports = UserController;

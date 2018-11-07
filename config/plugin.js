@@ -17,3 +17,8 @@ exports.routerPlus = {
   enabled: true,
   package: 'egg-router-plus',
 };
+
+exports.jwt = {
+  enable: true,
+  package: 'egg-jwt',
+};

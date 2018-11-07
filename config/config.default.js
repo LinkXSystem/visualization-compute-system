@@ -30,5 +30,11 @@ module.exports = appInfo => {
     },
   };
 
+  config.jwt = {
+    secret: 'linksystem',
+    enable: true,
+    match: '/jwt',
+  };
+
   return config;
 };

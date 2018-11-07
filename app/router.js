@@ -6,6 +6,11 @@
 module.exports = app => {
   const { router, controller } = app;
 
+  // 博客用户
+  const auth = router.namespace('/api/v1/authentic');
+  auth.post('/token', controller.authentic.login);
+  auth.post('/register', controller.authentic.register);
+
   // 博客文章
   const articles = router.namespace('/api/v1/article');
   articles.resources('/', controller.articles);
