@@ -22,3 +22,8 @@ exports.jwt = {
   enable: true,
   package: 'egg-jwt',
 };
+
+exports.bull = {
+  enable: true,
+  package: 'egg-bull-queue',
+};

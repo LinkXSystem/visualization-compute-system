@@ -27,4 +27,8 @@ module.exports = app => {
   // 博客专栏
   const columns = router.namespace('/api/v1/column');
   columns.resources('/', controller.columns);
+
+  // 任务建立
+  const tasks = router.namespace('/api/v1/task');
+  tasks.post('/build', controller.tasks.build);
 };

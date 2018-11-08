@@ -36,5 +36,21 @@ module.exports = appInfo => {
     match: '/jwt',
   };
 
+  config.bull = {
+    clients: {
+      bull: {
+        name: 'bull',
+      },
+    },
+    default: {
+      redis: {
+        host: '193.112.23.66',
+        port: 6379,
+        // 设置 0 号库
+        db: 0,
+      },
+    },
+  };
+
   return config;
 };
