@@ -16,6 +16,12 @@ module.exports = app => {
   articles.resources('/', controller.articles);
   articles.post('/labels', controller.articles.findArticleByLabel);
 
+  // 文章标签
+  const labels = router.namespace('/api/v1/labels');
+  labels.post('/query', controller.labels.query);
+  labels.post('/batch', controller.labels.batch);
+  labels.post('/build', controller.labels.build);
+
   // 博客评论
   const comments = router.namespace('/api/v1/comment');
   comments.resources('/', controller.comments);

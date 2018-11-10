@@ -13,10 +13,12 @@ module.exports = app => {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Column',
     },
-    label: {
-      type: Array,
-      required: true,
-    },
+    label: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Label',
+      },
+    ],
     title: {
       type: String,
       required: true,

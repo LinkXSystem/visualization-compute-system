@@ -1,13 +1,17 @@
 'use strict';
 
+const Word = require('./utils/word');
+
 module.exports = app => {
-  app.beforeStart(() => {
+  app.beforeStart(async () => {
+    // 任务队列
     app.bull.get('bull').process(job => {
-      setTimeout(() => {
-        console.log('====================================');
-        console.log(job.data);
-        console.log('====================================');
-      }, 2000);
+      const labels = Word.analysis(...job.data);
+
+      app.service.labels.batchInsert(labels);
     });
+
+    // 任务调度
+    await app.runSchedule('dictionary');
   });
 };
