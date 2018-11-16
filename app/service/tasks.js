@@ -8,23 +8,13 @@ class TaskService extends Service {
     super(ctx);
   }
 
-  build() {
+  build(payload) {
     const { ctx } = this;
 
-    // ctx.app.bull.get('bull').add({
-    //   job: payload,
-    // });
-
     ctx.app.bull.get('bull').add({
-      job: '1',
-    });
-
-    ctx.app.bull.get('bull').add({
-      job: '2',
-    });
-
-    ctx.app.bull.get('bull').add({
-      job: '3',
+      job: {
+        paragraphs: payload,
+      },
     });
   }
 }
