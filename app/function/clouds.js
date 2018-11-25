@@ -21,8 +21,13 @@ class CloudUtils {
   }
 
   token() {
+    const { domain } = this.app.config.cloud;
     const { policy, mac } = this;
-    return policy.uploadToken(mac);
+
+    return {
+      domain,
+      token: policy.uploadToken(mac),
+    };
   }
 }
 

@@ -10,11 +10,9 @@ class CloudController extends Controller {
 
   token() {
     const { ctx } = this;
-    const token = ctx.app.function.clouds.token();
+    const upload = ctx.app.function.clouds.token();
 
-    ctx.helper.success(ctx, {
-      token,
-    });
+    ctx.helper.success(ctx, upload);
   }
 }
 
