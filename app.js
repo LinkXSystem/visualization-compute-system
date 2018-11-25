@@ -1,7 +1,7 @@
 'use strict';
 
-// const Word = require('./utils/word');
-// const Markdown = require('./utils/markdown');
+const Word = require('./utils/word');
+const Markdown = require('./utils/markdown');
 const path = require('path');
 
 module.exports = app => {
