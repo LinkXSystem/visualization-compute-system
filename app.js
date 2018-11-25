@@ -1,7 +1,8 @@
 'use strict';
 
-const Word = require('./utils/word');
-const Markdown = require('./utils/markdown');
+// const Word = require('./utils/word');
+// const Markdown = require('./utils/markdown');
+const path = require('path');
 
 module.exports = app => {
   app.beforeStart(async () => {
@@ -34,5 +35,16 @@ module.exports = app => {
 
     // 任务调度
     await app.runSchedule('dictionary');
+  });
+
+  const dir = path.join(app.config.baseDir, 'app/function');
+
+  app.loader.loadToApp(dir, 'function', {
+    ignore: '*.md',
+    initializer(model) {
+      // 第一个参数为 export 的对象
+      // 第二个参数为一个对象，只包含当前文件的路径
+      return new model(app);
+    },
   });
 };

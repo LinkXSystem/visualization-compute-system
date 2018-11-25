@@ -22,6 +22,10 @@ module.exports = app => {
   labels.post('/batch', controller.labels.batch);
   labels.post('/build', controller.labels.build);
 
+  // 云存储
+  const clouds = router.namespace('/api/v1/clouds');
+  clouds.post('/token', controller.clouds.token);
+
   // 博客评论
   const comments = router.namespace('/api/v1/comment');
   comments.resources('/', controller.comments);

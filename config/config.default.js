@@ -36,6 +36,12 @@ module.exports = appInfo => {
     match: '/jwt',
   };
 
+  config.cloud = {
+    access: '2H2hnPVgPEHVumhuItl7YEB6wqJ8sOkLvLhLM5Ug',
+    secret: 'qRLm5jVOQmzdIRx1mF9G8geXC1r4BXZa3E8WY51z',
+    scope: 'linksystem',
+  };
+
   config.bull = {
     clients: {
       bull: {
