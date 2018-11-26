@@ -13,7 +13,8 @@ module.exports = app => {
 
   // 博客文章
   const articles = router.namespace('/api/v1/article');
-  articles.resources('/', controller.articles);
+  // articles.resources('/', controller.articles);
+  articles.post('/', app.jwt, controller.articles.create);
   articles.post('/labels', controller.articles.findArticleByLabel);
 
   // 文章标签
