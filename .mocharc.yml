@@ -1,0 +1,21 @@
+# 配置的参考项目：https://github.com/mochajs/mocha/blob/master/example/config/README.md
+# 配置的参考文档：https://mochajs.org/#mochaopts
+color: true
+# 指定测试用例错误即立即停止测试
+bail: false
+# 指定测试文件，注意该配置只能指定单一文件测试
+# file:
+#   -
+# 递归执行测试
+recursive: false
+# 指定测试报告形式，默认格式为 spec
+reporter: spec
+# 忽略部分文件夹
+ignore:
+  - test/app/**/*.test.js
+# 配置测试文件的正则
+spec: test/**/*.test.js
+# 指定测试时间
+timeout: false
+# 指定是否监控测试文件的变化
+watch: false
